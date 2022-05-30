@@ -19,7 +19,7 @@
   <p align="center">
 View your camera feed right on your favicon (tab icon).<br />
     <br />
-    <a href="https://github.com/kinshukdua/favicam"><strong>View Demo »</strong></a>
+    <a href="https://kinshukdua.github.io/favicam"><strong>View Demo »</strong></a>
     <br />
     <br />
     <a href="https://github.com/kinshukdua/favicam/issues">Report Bug</a>
