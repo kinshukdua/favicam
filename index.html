@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" type="image/png" href="./favicon.png" id="favicon">
+        <title>FaviCam</title>
+	</head>
+	<body>
+		<h1 style="text-align:center">^ Look at the tab icon for this page ^</h1>
+		<script>
+        // Javascript
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        const canvas = document.createElement('canvas');
+        const video = document.createElement('video');
+        canvas.height = 16;
+        canvas.width = 16;
+        const fps = 30;
+        const ctx = canvas.getContext("2d");
+        // const video = document.querySelector("video");
+        navigator.mediaDevices.getUserMedia({
+        video: {
+        width:     16,
+        height:    16,
+        frameRate: fps
+        }}).then(function(stream) {
+        video.addEventListener('play', () => {
+            async function step() {
+            await delay(1000/fps);
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            requestAnimationFrame(step);
+            setFavicon();
+ 
+        }
+        requestAnimationFrame(step);
+        })
+        video.srcObject = stream;
+        video.onloadedmetadata = function(e) {
+            video.play();
+        };
+        })
+
+		function setFavicon() {
+			var favicon = document.getElementById("favicon");
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+			favicon.setAttribute("href", canvas.toDataURL());
+            // Imporove framerate by abusing replaceState
+			history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
+		}
+        </script>
+    </body>
+</html>
